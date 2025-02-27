@@ -1,22 +1,28 @@
-import React, { useRef } from 'react';
+// better code
+import React, { useState, useRef } from 'react';
 
-function FocusInput() {
-  // Step 1: Create a ref to store the input element
-  const inputRef = useRef(null);
+function Stopwatch() {
+  const [time, setTime] = useState(0);
+  const intervalRef = useRef(null);
 
-  // Step 2: Define the function to focus the input
-  const handleFocus = () => {
-    // Access the DOM node and call the focus method
-    inputRef.current.focus();
+  const startTimer = () => {
+    if (intervalRef.current !== null) return; // Already running, do nothing
+
+    intervalRef.current = setInterval(() => {
+      setTime((prevTime) => prevTime + 1);
+    }, 1000);
+  };
+
+  const stopTimer = () => {
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
   };
 
   return (
     <div>
-      {/* Step 3: Attach the ref to the input element */}
-      <input ref={inputRef} type="text" placeholder="Click the button to focus me" />
-      <button onClick={handleFocus}>Focus the input</button>
+      <h1>Timer: {time}</h1>
+      <button onClick={startTimer}>Start</button>
+      <button onClick={stopTimer}>Stop</button>
     </div>
   );
 }
-
-export default FocusInput;
