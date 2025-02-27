@@ -1,58 +1,25 @@
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./pages/Layout";
+import Home from "./pages/Home";
+import Blogs from "./pages/Blogs";
+import Contact from "./pages/Contact";
+import NoPage from "./pages/NoPage";
 
-import "./App.css";
-import { BrowserRouter, Routes, Link ,Route, useNavigate} from "react-router-dom";
-function App() {
-  return <div>
+export default function App() {
+  return (
     <BrowserRouter>
-    <Link to="/">Allen</Link>
-
-    <Link to="/neet/online-coaching-class-11">Class 11</Link>
-    <Link to="/neet/online-coaching-class-12">Class 12</Link>
-    <Link to="/neet/online-coaching-class-13">Class 13</Link>
       <Routes>
-        <Route path="neet/online-coaching-class-11" element={<Class11Program />} />
-        <Route path="neet/online-coaching-class-12" element={<Class12Program />} />
-        <Route path="neet/online-coaching-class-13" element={<Class13Program />} />
-        <Route path="/" element={<LandingPage />} />
-        <Route path="*"element={<ErrorPage />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
-  </div>;
+  );
 }
 
-function ErrorPage() {
-  return <div>
-    <h1>Error Page</h1>
-  </div>;
-}
-
-function LandingPage() {
-  return <div>
-    <h1>Welcome to Allen</h1>
-  </div>;
-}
-function Class11Program() {
-  return <div>
-    <h1>Class 11 Program</h1>
-  </div>;
-}
-
-function Class12Program() {
-  const navigate = useNavigate();
-
-  function redirect() {
-    navigate("/");
-  }
-  return <div>
-    <h1>NEET programs for Class 12th </h1>
-    <button onClick={redirect}>Back</button>
-  </div>;
-}
-
-function Class13Program() {
-  return <div>
-    <h1>Class 13 Program</h1>
-  </div>;
-}
-
-export default App;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
