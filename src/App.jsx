@@ -14,8 +14,15 @@ function App() {
         <Route path="neet/online-coaching-class-12" element={<Class12Program />} />
         <Route path="neet/online-coaching-class-13" element={<Class13Program />} />
         <Route path="/" element={<LandingPage />} />
+        <Route path="*"element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
+  </div>;
+}
+
+function ErrorPage() {
+  return <div>
+    <h1>Error Page</h1>
   </div>;
 }
 
