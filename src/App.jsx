@@ -1,25 +1,22 @@
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./pages/Layout";
-import Home from "./pages/Home";
-import Blogs from "./pages/Blogs";
-import Contact from "./pages/Contact";
-import NoPage from "./pages/NoPage";
+import React, { useRef } from 'react';
 
-export default function App() {
+function FocusInput() {
+  // Step 1: Create a ref to store the input element
+  const inputRef = useRef(null);
+
+  // Step 2: Define the function to focus the input
+  const handleFocus = () => {
+    // Access the DOM node and call the focus method
+    inputRef.current.focus();
+  };
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <div>
+      {/* Step 3: Attach the ref to the input element */}
+      <input ref={inputRef} type="text" placeholder="Click the button to focus me" />
+      <button onClick={handleFocus}>Focus the input</button>
+    </div>
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+export default FocusInput;
