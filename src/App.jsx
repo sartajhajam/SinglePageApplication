@@ -1,6 +1,6 @@
 
 import "./App.css";
-import { BrowserRouter, Routes, Link ,Route} from "react-router-dom";
+import { BrowserRouter, Routes, Link ,Route, useNavigate} from "react-router-dom";
 function App() {
   return <div>
     <BrowserRouter>
@@ -31,8 +31,14 @@ function Class11Program() {
 }
 
 function Class12Program() {
+  const navigate = useNavigate();
+
+  function redirect() {
+    navigate("/");
+  }
   return <div>
-    <h1>Class 12 Program</h1>
+    <h1>NEET programs for Class 12th </h1>
+    <button onClick={redirect}>Back</button>
   </div>;
 }
 
